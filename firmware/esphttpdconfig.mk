@@ -1,0 +1,1 @@
+COMPRESS_W_YUI = yes
