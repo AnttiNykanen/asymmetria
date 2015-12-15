@@ -33,6 +33,7 @@
 
 #include "user_cgi.h"
 #include "user_dimmer.h"
+#include "user_button.h"
 
 int authGetUserPw(HttpdConnData *connData, int no, char *user, int userLen, char *pass, int passLen) {
     int rv = 0;
@@ -102,4 +103,6 @@ void user_init(void)
     dim_initial_status->dim_pct  = 85;
     dimmer_init(dim_initial_status, 100, 0);
     free(dim_initial_status);
+
+    button_init();
 }

@@ -89,6 +89,19 @@ void dimmer_set_dim_pct(uint8_t dim_pct)
 }
 
 /**
+ * Get dimmer percentage
+ */
+uint8_t dimmer_get_dim_pct(void)
+{
+    uint8_t rv;
+    xSemaphoreTake(s_status_mutex, portMAX_DELAY);
+    rv = s_status.dim_pct;
+    xSemaphoreGive(s_status_mutex);
+    return rv;
+}
+
+
+/**
  * Set power on or off
  *
  * @param power_on whether to set the power on or off
@@ -99,6 +112,18 @@ void dimmer_set_power_on(bool power_on)
     s_status.power_on = power_on;
     xSemaphoreGive(s_status_mutex);
     xQueueSend(s_dimmer_queue, &DIMMER_QUEUE_MSG, 0);
+}
+
+/**
+ * Get power status
+ */
+bool dimmer_get_power_on(void)
+{
+    bool rv;
+    xSemaphoreTake(s_status_mutex, portMAX_DELAY);
+    rv = s_status.power_on;
+    xSemaphoreGive(s_status_mutex);
+    return rv;
 }
 
 /**

@@ -5,6 +5,8 @@
  * @author Antti Nykänen <aon@umetronics.com>
  */
 
+#pragma once
+
 #include "httpd.h"
 
 int user_cgi_set_status(HttpdConnData *conn_data);

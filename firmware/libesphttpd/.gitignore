@@ -1,0 +1,5 @@
+/build/*
+/espfs/*
+/html_compressed/*
+*.a
+webpages.espfs
