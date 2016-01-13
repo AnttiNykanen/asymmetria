@@ -5,7 +5,7 @@ export BIN_PATH=./build
 
 case $1 in
 build)
-	make BOOT=new APP=1 SPI_SPEED=40 SPI_MODE=DIO SPI_SIZE_MAP=6
+	make BOOT=new APP=1 SPI_SPEED=40 SPI_MODE=QIO SPI_SIZE_MAP=6
 	;;
 flash)
 	esptool.py write_flash 0x01000 build/upgrade/user1.4096.new.6.bin 
