@@ -44,7 +44,11 @@ static uint32_t s_dimmer_pct_to_dc(uint8_t pct)
 {
     if (pct > 100)
         pct = 100;
-    
+
+    /*
+     * TODO: investigate why the formula in the docs gives incorrect
+     * results but this seems to work more or less correctly
+     */
     return (s_pwm_period * 10 * pct / 100);
 }
 
@@ -90,6 +94,8 @@ void dimmer_set_dim_pct(uint8_t dim_pct)
 
 /**
  * Get dimmer percentage
+ *
+ * @return dimmer percentage (0-100)
  */
 uint8_t dimmer_get_dim_pct(void)
 {
@@ -116,6 +122,8 @@ void dimmer_set_power_on(bool power_on)
 
 /**
  * Get power status
+ *
+ * @return power status (true=on, false=off)
  */
 bool dimmer_get_power_on(void)
 {
@@ -128,6 +136,8 @@ bool dimmer_get_power_on(void)
 
 /**
  * Dimmer FreeRTOS task
+ *
+ * @param parameters task parameters
  */
 static void dimmer_task(void *parameters)
 {
@@ -159,6 +169,10 @@ static void dimmer_task(void *parameters)
 
 /**
  * Initialize the dimmer and start the RTOS task
+ *
+ * @param initial_status  initial dimmer status structure
+ * @param pwm_period      PWM period
+ * @param pwm_channel_num PWM channel number
  */
 void dimmer_init(dimmer_status_t *initial_status, uint32_t pwm_period,
                  uint32_t pwm_channel_num)

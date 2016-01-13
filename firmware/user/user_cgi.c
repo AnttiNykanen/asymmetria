@@ -14,6 +14,8 @@
 
 /**
  * Set the dimmer on or off based on the "status" get parameter
+ *
+ * @param conn_data HTTP connection data
  */
 int user_cgi_set_status(HttpdConnData *conn_data)
 {
@@ -35,6 +37,8 @@ int user_cgi_set_status(HttpdConnData *conn_data)
 
 /**
  * Set the dimmer percentage based on the "dimValue" get parameter
+ *
+ * @param conn_data HTTP connection data
  */
 int user_cgi_set_dimmer(HttpdConnData *conn_data)
 {
@@ -53,6 +57,8 @@ int user_cgi_set_dimmer(HttpdConnData *conn_data)
 
 /**
  * Return a JSON structure with the current power state and percentage
+ *
+ * @param conn_data HTTP connection data
  */
 int user_cgi_get_dimmer(HttpdConnData *conn_data)
 {

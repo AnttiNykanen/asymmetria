@@ -22,6 +22,11 @@
 
 #define HOLD_TRESHOLD (2000 / 50)
 
+/**
+ * Button handler task
+ * 
+ * @param parameters task parameters
+ */
 static void s_button_task(void *parameters)
 {
     portTickType last_wake_time;
