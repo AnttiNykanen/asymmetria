@@ -35,18 +35,30 @@
 #include "user_dimmer.h"
 #include "user_button.h"
 
+/** Username and password for HTTP authentication */
+#define AUTH_USER "testaaja"
+#define AUTH_PASS "testi"
+
+/** SSID and password for Wi-Fi */
+#define DEMO_AP_SSID "ESP8266"
+#define DEMO_AP_PASSWORD "espressif"
+
+/**
+ * HTTP authentication function
+ */
 int authGetUserPw(HttpdConnData *connData, int no, char *user, int userLen, char *pass, int passLen) {
     int rv = 0;
     
     if (no == 0) {
-        strncpy(user, "testaaja", userLen);
-        strncpy(pass, "testi", passLen);
+        strncpy(user, AUTH_USER, userLen);
+        strncpy(pass, AUTH_PASS, passLen);
         rv = 1;
     }
 
     return rv;
 }
 
+/** HTTPD routes */
 HttpdBuiltInUrl g_builtInUrls[] = {
     {"*", authBasic, authGetUserPw },
     {"/", cgiRedirect, "/index.html"},
@@ -57,9 +69,6 @@ HttpdBuiltInUrl g_builtInUrls[] = {
     {NULL, NULL, NULL}
 };
 
-
-#define DEMO_AP_SSID "ESP8266"
-#define DEMO_AP_PASSWORD "espressif"
 
 /******************************************************************************
  * FunctionName : user_init
@@ -73,6 +82,7 @@ void user_init(void)
     struct softap_config *config;
     dimmer_status_t *dim_initial_status;
 
+    /* Set UART0 to 115200 bps, 8N1 */
     uart_config.baud_rate = BIT_RATE_115200;
     uart_config.data_bits = UART_WordLength_8b;
     uart_config.parity = USART_Parity_None;
@@ -83,6 +93,7 @@ void user_init(void)
 
     UART_ParamConfig(UART0, &uart_config);
 
+    /* Configure Wi-Fi */
     wifi_set_opmode(SOFTAP_MODE);
     
     config = (struct softap_config *)zalloc(sizeof(struct softap_config));
@@ -95,14 +106,17 @@ void user_init(void)
     wifi_softap_set_config(config);
     free(config);
 
+    /* Start httpd task */
     espFsInit((void*)webpages_espfs_start);
     httpdInit(g_builtInUrls, 80);
 
+    /* Start dimmer task */
     dim_initial_status = (dimmer_status_t *)zalloc(sizeof(dimmer_status_t));
     dim_initial_status->power_on = true;
     dim_initial_status->dim_pct  = 85;
     dimmer_init(dim_initial_status, 50, 0);
     free(dim_initial_status);
 
+    /* Start button task */
     button_init();
 }
