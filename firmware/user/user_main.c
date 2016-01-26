@@ -101,7 +101,7 @@ void user_init(void)
     dim_initial_status = (dimmer_status_t *)zalloc(sizeof(dimmer_status_t));
     dim_initial_status->power_on = true;
     dim_initial_status->dim_pct  = 85;
-    dimmer_init(dim_initial_status, 100, 0);
+    dimmer_init(dim_initial_status, 50, 0);
     free(dim_initial_status);
 
     button_init();

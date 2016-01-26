@@ -49,7 +49,7 @@ static uint32_t s_dimmer_pct_to_dc(uint8_t pct)
      * TODO: investigate why the formula in the docs gives incorrect
      * results but this seems to work more or less correctly
      */
-    return (s_pwm_period * 10 * pct / 100);
+    return (s_pwm_period * 10 * pct / 50);
 }
 
 /**
