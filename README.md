@@ -13,5 +13,14 @@ regulator's ratings.
   * [hardware](./hardware/): Hardware design files
   * [firmware](./firmware/): Firmware source code
   * [doc](./doc/): Documentation
+  
+## License ##
+
+  * Hardware:
+    [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+  * Firmware:
+    * Files in the user subdirectory:
+      [ISC](https://opensource.org/licenses/ISC)
+    * Everything else: whatever the files say
 
 [ledstrips]: http://www.aliexpress.com/item/Ultra-thin-5W-LED-COB-60-Chip-Led-Driving-DRL-Daytime-Running-Light-Lamp-Bar-Strip/32303226004.html
