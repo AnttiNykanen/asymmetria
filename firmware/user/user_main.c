@@ -47,10 +47,16 @@
 #define AUTH_PASS "testi"
 
 /** Wi-Fi SSID */
-#define DEMO_AP_SSID "ESP8266"
+#define AP_SSID "ESP8266"
 
 /** Wi-Fi Password */
-#define DEMO_AP_PASSWORD "espressif"
+#define AP_PASSWORD "none"
+
+/** Wi-Fi Authentication mode */
+#define AP_AUTHMODE AUTH_OPEN
+
+/** Wi-Fi Soft-AP channel */
+#define AP_CHANNEL 5
 
 /**
  * HTTP authentication function
@@ -104,11 +110,12 @@ void user_init(void)
     
     config = (struct softap_config *)zalloc(sizeof(struct softap_config));
     wifi_softap_get_config(config);
-    sprintf(config->ssid, DEMO_AP_SSID);
-    sprintf(config->password, DEMO_AP_PASSWORD);
-    config->authmode = AUTH_WPA_WPA2_PSK;
+    sprintf(config->ssid, AP_SSID);
+    sprintf(config->password, AP_PASSWORD);
+    config->authmode = AP_AUTHMODE;
     config->ssid_len = 0;
     config->max_connection = 4;
+    config->channel = AP_CHANNEL;
     wifi_softap_set_config(config);
     free(config);
 
