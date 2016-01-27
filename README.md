@@ -22,5 +22,9 @@ regulator's ratings.
     * Files in the user subdirectory:
       [ISC](https://opensource.org/licenses/ISC)
     * Everything else: whatever the files say
+ 
+## The Fine Print ##
+
+Note that owning and/or using homemade radio transmitters, which this thing is, might not be legal for everyone everywhere.
 
 [ledstrips]: http://www.aliexpress.com/item/Ultra-thin-5W-LED-COB-60-Chip-Led-Driving-DRL-Daytime-Running-Light-Lamp-Bar-Strip/32303226004.html
