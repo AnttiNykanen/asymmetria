@@ -20,7 +20,11 @@
 #define BUTTON_PIN_NO 4
 #define BUTTON_PIN_FUNC FUNC_GPIO4
 
-#define HOLD_TRESHOLD (2000 / 50)
+/** Button task poll interval in milliseconds */
+#define TASK_POLL_INTERVAL 50
+
+/** Button hold treshold */
+#define HOLD_TRESHOLD (2000 / TASK_POLL_INTERVAL)
 
 /**
  * Button handler task
@@ -30,7 +34,7 @@
 static void s_button_task(void *parameters)
 {
     portTickType last_wake_time;
-    const portTickType poll_frequency = 50 / portTICK_RATE_MS;
+    const portTickType poll_frequency = TASK_POLL_INTERVAL / portTICK_RATE_MS;
     uint8 button_state, last_button_state;
     uint16_t hold_counter;
     uint8_t dim_pct;

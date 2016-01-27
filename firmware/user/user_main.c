@@ -22,6 +22,11 @@
  *
  */
 
+/**
+ * @file user_main.c
+ * @brief User application main file
+ */
+
 #include "esp_common.h"
 #include "driver/uart.h"
 
@@ -35,12 +40,16 @@
 #include "user_dimmer.h"
 #include "user_button.h"
 
-/** Username and password for HTTP authentication */
+/** HTTP authentication username */
 #define AUTH_USER "testaaja"
+
+/** HTTP authentication password */
 #define AUTH_PASS "testi"
 
-/** SSID and password for Wi-Fi */
+/** Wi-Fi SSID */
 #define DEMO_AP_SSID "ESP8266"
+
+/** Wi-Fi Password */
 #define DEMO_AP_PASSWORD "espressif"
 
 /**
@@ -70,12 +79,9 @@ HttpdBuiltInUrl g_builtInUrls[] = {
 };
 
 
-/******************************************************************************
- * FunctionName : user_init
- * Description  : entry of user application, init user function here
- * Parameters   : none
- * Returns      : none
-*******************************************************************************/
+/**
+ * Entry of user application, init user function here
+ */
 void user_init(void)
 {
     UART_ConfigTypeDef uart_config;
